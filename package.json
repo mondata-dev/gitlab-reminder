@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "Reminder for unanswered gitlab issues",
   "main": "gitlab-reminder.js",
-  "scripts": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/gitlab-reminder.js"
+  },
   "dependencies": {
     "@gitbeaker/node": "^35.8.1",
     "@slack/webhook": "^6.1.0"

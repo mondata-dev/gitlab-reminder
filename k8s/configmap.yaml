@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gitlab-reminder
+data:
+  GITLAB_HOST: https://gitlab.com
+  GITLAB_PROJECT_ID: 12345

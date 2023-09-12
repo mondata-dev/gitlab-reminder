@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: gitlab-reminder
+spec:
+  concurrencyPolicy: Forbid
+  schedule: '0 9 * * *' # 9am UTC every day
+  jobTemplate:
+    spec:
+      backoffLimit: 2
+      activeDeadlineSeconds: 600 # timeout
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: gitlab-reminder
+              image: mondata/gitlab-reminder:1.0.0
+              envFrom:
+                - configMapRef:
+                    name: gitlab-reminder
+                - secretRef:
+                    name: gitlab-reminder
