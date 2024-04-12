@@ -14,7 +14,7 @@ spec:
           restartPolicy: Never
           containers:
             - name: gitlab-reminder
-              image: mondata/gitlab-reminder:1.1.0
+              image: mondata/gitlab-reminder:1.1.1
               envFrom:
                 - configMapRef:
                     name: gitlab-reminder
