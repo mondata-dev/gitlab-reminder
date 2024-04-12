@@ -12,7 +12,11 @@ async function isUnanswered(issue) {
     const notes = await gitlab.IssueNotes.all(process.env.GITLAB_PROJECT_ID, issue.iid);
 
     const lastAnswer = notes.filter(note =>
-        !note.system && (!note.confidential || note.body.includes('/ deactive gitlab reminder'))
+        !note.system &&
+            (!note.confidential ||
+                note.body.includes('/ deactive gitlab reminder') ||
+                note.body.includes('/ deactivate gitlab reminder')
+            )
     )[0];
 
     return !lastAnswer || lastAnswer.author.username === "support-bot";
