@@ -23,10 +23,17 @@ async function isUnanswered(issue) {
 }
 
 async function main() {
-    const issues = await gitlab.Issues.all({
-        projectId: process.env.GITLAB_PROJECT_ID,
-        state: "opened"
-    });
+    let issues;
+    try {
+        issues = await gitlab.Issues.all({
+            projectId: process.env.GITLAB_PROJECT_ID,
+            state: "opened"
+        });
+    } catch (e) {
+        console.error("Error fetching issues; notifying slack about it...");
+        await slackWebhook.send({ text: `There was an error fetching the gitlab issues: ${e.message}` });
+        throw e;
+    }
 
     console.log(`Checking ${issues.length} open issues`);
 
